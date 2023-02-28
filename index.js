@@ -1,19 +1,25 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-app.set('view engine', 'ejs');
-app.set('views', './views')
+
+// Configuration des fichiers statiques
 app.use(express.static('public'));
+
+// Page d'accueil
 app.get('/', (req, res) => {
-  res.render('home', { title: 'home' });
-});
-app.get('/services', (req, res) => {
-  res.render('services', { title: 'Our Services' });
+  res.sendFile(__dirname + '/views/home.html');
 });
 
-app.get('/contact', (req, res) => {
-  res.render('contact', { title: 'Contact Us' });
+// Nos services
+app.get('/services', (req, res) => {
+  res.sendFile(__dirname + '/views/services.html');
 });
+
+// Contactez-nous
+app.get('/contact', (req, res) => {
+  res.sendFile(__dirname + '/views/contact.html');
+});
+
 app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
+  console.log(`Serveur démarré sur le port ${port}`);
 });
